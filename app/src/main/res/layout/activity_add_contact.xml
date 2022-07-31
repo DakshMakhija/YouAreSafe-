@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddContact">
+
+    <ImageView
+        android:id="@+id/ivAdd"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="-15sp"
+        android:src="@drawable/surv" />
+
+    <TextView
+        android:id="@+id/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivAdd"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:text="You are Safe!!"
+        android:fontFamily="@font/poppins"
+        android:textSize="22sp"
+        android:layout_marginBottom="50sp"
+        android:textColor="?android:textColorPrimary"
+        android:textStyle="italic|bold" />
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Text"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="50sp"
+        android:layout_marginBottom="10dp"
+        android:ems="15"
+        android:fontFamily="@font/poppins"
+        android:hint="Name of the contact"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColor="?android:textColorPrimary"
+        android:textColorHint="?android:textColorPrimary" />
+
+    <EditText
+        android:id="@+id/etRelation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etName"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="50sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:ems="15"
+        android:fontFamily="@font/poppins"
+        android:hint="Relation"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColor="?android:textColorPrimary"
+        android:textColorHint="?android:textColorPrimary" />
+
+    <EditText
+        android:id="@+id/etNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etRelation"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:ems="15"
+        android:layout_marginStart="50sp"
+        android:fontFamily="@font/poppins"
+        android:textColor="?android:textColorPrimary"
+        android:textColorHint="?android:textColorPrimary"
+        android:hint="Number"
+        android:inputType="phone"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:minLines="1"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/etOtp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etNumber"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="50sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:ems="15"
+        android:fontFamily="@font/poppins"
+        android:hint="Enter Otp"
+        android:inputType="phone"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:minLines="1"
+        android:padding="10dp"
+        android:textColor="?android:textColorPrimary"
+        android:textColorHint="?android:textColorPrimary" />
+
+    <TextView
+        android:gravity="center"
+        android:layout_below="@id/etOtp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="15sp"
+        android:textSize="10sp"
+        android:fontFamily="@font/poppins"
+        android:text="OTP will be auto-verified\nafter a few seconds."
+        android:drawableRight="@drawable/ic_baseline_check_24"
+        android:textColor="?android:textColorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/oval"
+        android:fontFamily="@font/poppins"
+        android:text="Add Contact"
+        android:textAllCaps="false"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="20dp" />
+
+</RelativeLayout>

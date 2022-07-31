@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Splash">
+
+    <ImageView
+        android:id="@+id/ivSplash"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_above="@id/tvSplash"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="-60sp"
+        android:src="@drawable/logobg" />
+
+    <TextView
+        android:id="@+id/tvSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/poppins"
+        android:text="You are Safe!!"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="30dp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/tv2Splash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv3Splash"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/poppins"
+        android:text="We are here for you always!!"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv3Splash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="100dp"
+        android:fontFamily="@font/poppins"
+        android:text=":) :)"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
