@@ -13,7 +13,7 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="-15sp"
+        android:layout_marginBottom="-16sp"
         android:src="@drawable/surv" />
 
     <TextView
