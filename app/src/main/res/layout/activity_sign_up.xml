@@ -6,8 +6,8 @@
     tools:context=".Signup">
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_above="@id/tvSignup"
         android:layout_centerInParent="true"
         android:layout_marginBottom="-20sp"
@@ -20,7 +20,7 @@
         android:layout_above="@id/etEmailSignup"
         android:layout_centerInParent="true"
         android:layout_marginStart="50sp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="50dp"
         android:fontFamily="@font/poppins"
         android:text="You are Safe!!"
         android:textColor="?android:textColorPrimary"
@@ -35,6 +35,8 @@
         android:layout_centerInParent="true"
         android:layout_marginStart="50sp"
         android:layout_marginBottom="30dp"
+        android:autofillHints="emailAddress"
+        android:backgroundTint="@color/grey"
         android:ems="15"
         android:fontFamily="@font/poppins"
         android:hint="Email"
@@ -42,7 +44,7 @@
         android:maxLines="1"
         android:padding="10dp"
         android:textColor="?android:textColorPrimary"
-        android:textColorHint="?android:textColorPrimary" />
+        android:textColorHint="?android:textColorTertiary" />
 
     <EditText
         android:id="@+id/etPassSignup"
@@ -52,6 +54,8 @@
         android:layout_centerInParent="true"
         android:layout_marginStart="50sp"
         android:layout_marginBottom="30dp"
+        android:autofillHints="password"
+        android:backgroundTint="@color/grey"
         android:ems="15"
         android:fontFamily="@font/poppins"
         android:hint="Password"
@@ -59,7 +63,7 @@
         android:maxLines="1"
         android:padding="10dp"
         android:textColor="?android:textColorPrimary"
-        android:textColorHint="?android:textColorPrimary" />
+        android:textColorHint="?android:textColorTertiary" />
 
     <EditText
         android:id="@+id/etConfirmPassSignup"
@@ -67,16 +71,18 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/btnSignUp"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="80dp"
-        android:ems="15"
         android:layout_marginStart="50sp"
+        android:layout_marginBottom="80dp"
+        android:autofillHints="password"
+        android:backgroundTint="@color/grey"
+        android:ems="15"
         android:fontFamily="@font/poppins"
-        android:textColor="?android:textColorPrimary"
-        android:textColorHint="?android:textColorPrimary"
         android:hint="Confirm Password"
         android:inputType="textPassword"
         android:maxLines="1"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textColor="?android:textColorPrimary"
+        android:textColorHint="?android:textColorTertiary" />
 
     <Button
         android:id="@+id/btnSignUp"

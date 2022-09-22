@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="hearty">#D9086D</color>
     <color name="grey">#DAD8D9</color>
+    <color name="darkGrey">#888787</color>
     <color name="app">#6C63FF</color>
 </resources>

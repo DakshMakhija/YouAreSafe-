@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/logout"
-        android:title="Sign out" />
+    <item
+        android:title=""
+        android:id="@+id/help"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_help_outline_24"/>
 
-    <item android:id="@+id/deleteAcc"
-        android:title="Delete Account" />
+    <item
+        android:id="@+id/overflowMenu"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        android:title=""
+        app:showAsAction="always">
+        <menu>
+            <item android:id="@+id/logout"
+                android:icon="@drawable/ic_baseline_logout_24"
+                android:title="Sign out" />
+
+            <item android:id="@+id/deleteAcc"
+                android:icon="@drawable/ic_baseline_delete_forever_24"
+                android:title="Delete Account" />
+        </menu>
+    </item>
 
 </menu>

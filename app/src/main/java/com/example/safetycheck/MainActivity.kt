@@ -14,17 +14,13 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.telephony.SmsManager
-import android.util.Log
 import android.view.*
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.PopupMenu
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -43,10 +39,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var addContact: FloatingActionButton
     private lateinit var recyclerView: RecyclerView
+    private lateinit var toolbar : Toolbar
     private lateinit var stop: MaterialButton
     private lateinit var send: MaterialButton
-    private lateinit var help: ImageView
-    private lateinit var options: ImageView
     private lateinit var contactAdapter: ContactAdapter
     private lateinit var contactList: ArrayList<Item>
     private lateinit var firebaseAuth: FirebaseAuth
@@ -65,11 +60,14 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        toolbar = findViewById(R.id.toolbarMain)
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = ""
+
         addContact = findViewById(R.id.fabAddContact)
         stop = findViewById(R.id.btnStop)
         send = findViewById(R.id.btnSend)
-        help = findViewById(R.id.ivHelp)
-        options = findViewById(R.id.ivOptions)
         recyclerView = findViewById(R.id.rvContactList)
         contactList = ArrayList()
         contactAdapter = ContactAdapter(this, contactList)
@@ -81,14 +79,6 @@ class MainActivity : AppCompatActivity() {
 
         addContact.setOnClickListener {
             startActivity(Intent(this, AddContact::class.java))
-        }
-
-        help.setOnClickListener {
-            startActivity(Intent(this, Help::class.java))
-        }
-
-        options.setOnClickListener {
-            showPopup(it)
         }
 
         stop.setOnClickListener {
@@ -367,6 +357,29 @@ class MainActivity : AppCompatActivity() {
             true
         }
         popup.show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.items, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.help -> {
+                this.startActivity(Intent(this, Help::class.java))
+                return true
+            }
+            R.id.logout -> {
+                logout()
+                return true
+            }
+            R.id.deleteAcc -> {
+                deleteAccount()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun logout() {
