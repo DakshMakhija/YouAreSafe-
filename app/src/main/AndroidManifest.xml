@@ -22,25 +22,25 @@
         android:theme="@style/Theme.SafetyCheck"
         tools:targetApi="31">
         <activity
-            android:name=".ContactUs"
+            android:name=".ui.ContactUs"
             android:exported="false" />
         <activity
-            android:name=".Help"
+            android:name=".ui.Help"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Signup"
+            android:name=".auth.Signup"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".auth.Login"
             android:exported="false" />
         <activity
-            android:name=".AddContact"
+            android:name=".main.AddContact"
             android:exported="false" />
         <activity
-            android:name=".Splash"
+            android:name=".ui.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

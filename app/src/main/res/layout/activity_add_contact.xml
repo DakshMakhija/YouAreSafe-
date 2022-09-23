@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddContact">
+    tools:context=".main.AddContact">
 
     <ImageView
         android:id="@+id/ivAdd"
@@ -40,8 +40,8 @@
         android:layout_marginStart="50sp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/grey"
         android:autofillHints="name"
+        android:backgroundTint="@color/grey"
         android:ems="15"
         android:fontFamily="@font/poppins"
         android:hint="Name of the contact"
@@ -113,7 +113,7 @@
         android:fontFamily="@font/poppins"
         android:hint="Enter Otp"
         android:inputType="phone"
-        android:maxLength="10"
+        android:maxLength="4"
         android:maxLines="1"
         android:minLines="1"
         android:padding="10dp"

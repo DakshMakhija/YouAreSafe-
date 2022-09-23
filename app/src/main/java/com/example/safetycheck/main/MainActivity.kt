@@ -1,4 +1,4 @@
-package com.example.safetycheck
+package com.example.safetycheck.main
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -11,6 +11,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.location.Location
 import android.location.LocationManager
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.provider.Settings
 import android.telephony.SmsManager
@@ -22,6 +23,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.safetycheck.ui.Help
+import com.example.safetycheck.auth.Login
+import com.example.safetycheck.R
+import com.example.safetycheck.adapter.ContactAdapter
+import com.example.safetycheck.model.Item
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.button.MaterialButton
@@ -312,6 +318,8 @@ class MainActivity : AppCompatActivity() {
             )
         }
         Toast.makeText(applicationContext, "Emergency Message sent.", Toast.LENGTH_SHORT).show()
+        val mediaPlayer = MediaPlayer.create(this@MainActivity, R.raw.sound)
+        mediaPlayer.start()
         send.visibility = View.GONE
         stop.visibility = View.VISIBLE
     }

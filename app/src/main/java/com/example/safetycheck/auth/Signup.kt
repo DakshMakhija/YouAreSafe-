@@ -1,4 +1,4 @@
-package com.example.safetycheck
+package com.example.safetycheck.auth
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.safetycheck.R
 import com.google.firebase.auth.FirebaseAuth
 import java.util.regex.Matcher
 import java.util.regex.Pattern

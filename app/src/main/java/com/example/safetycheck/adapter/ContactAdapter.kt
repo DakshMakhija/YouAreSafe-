@@ -1,4 +1,4 @@
-package com.example.safetycheck
+package com.example.safetycheck.adapter
 
 import android.app.AlertDialog
 import android.content.Context
@@ -9,6 +9,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.safetycheck.model.Item
+import com.example.safetycheck.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import java.util.ArrayList
