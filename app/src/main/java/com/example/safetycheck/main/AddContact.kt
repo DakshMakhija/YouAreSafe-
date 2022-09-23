@@ -10,8 +10,10 @@ import android.telephony.SmsManager
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +28,7 @@ class AddContact : AppCompatActivity() {
     private lateinit var number: EditText
     private lateinit var otpEnter: EditText
     private lateinit var addContact: Button
+    private lateinit var text: TextView
     private lateinit var firebaseAuth: FirebaseAuth
 
     @SuppressLint("SetTextI18n")
@@ -38,6 +41,7 @@ class AddContact : AppCompatActivity() {
         number = findViewById(R.id.etNumber)
         otpEnter = findViewById(R.id.etOtp)
         addContact = findViewById(R.id.btnAdd)
+        text = findViewById(R.id.tvAuto)
         firebaseAuth = FirebaseAuth.getInstance()
 
         addContact.setOnClickListener {
@@ -46,6 +50,9 @@ class AddContact : AppCompatActivity() {
 
         addContact.tag = "send"
         addContact.text = "Send OTP"
+
+        otpEnter.visibility = View.GONE
+        text.visibility = View.GONE
 
     }
 
@@ -66,6 +73,9 @@ class AddContact : AppCompatActivity() {
                 .create()
                 .show()
         } else {
+            otpEnter.visibility = View.VISIBLE
+            text.visibility = View.VISIBLE
+
             val otp = (1000..9999).random().toString()
             Toast.makeText(this, "OTP is : $otp", Toast.LENGTH_SHORT).show()
             val obj = SmsManager.getDefault()

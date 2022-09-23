@@ -121,14 +121,15 @@
         android:textColorHint="?android:textColorTertiary" />
 
     <TextView
+        android:id="@+id/tvAuto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/etOtp"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="5sp"
         android:layout_marginEnd="15sp"
-        android:drawablePadding="5dp"
         android:drawableRight="@drawable/ic_baseline_check_24"
+        android:drawablePadding="5dp"
         android:fontFamily="@font/poppins"
         android:gravity="center"
         android:text="OTP will be auto-verified"
