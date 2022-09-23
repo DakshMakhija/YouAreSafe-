@@ -46,14 +46,28 @@
         android:textColor="?android:textColorPrimary"
         android:textColorHint="?android:textColorTertiary" />
 
+    <ImageView
+        android:id="@+id/showPass"
+        android:tag="Show"
+        android:layout_width="wrap_content"
+        android:clickable="true"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="35dp"
+        android:layout_above="@id/etPassLogin"
+        android:layout_marginBottom="-30dp"
+        android:src="@drawable/ic_baseline_remove_red_eye_24"
+        android:focusable="true" />
+
     <EditText
         android:id="@+id/etPassLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/btnSignIn"
         android:layout_centerInParent="true"
-        android:layout_marginStart="50sp"
+        android:layout_marginStart="25sp"
         android:layout_marginBottom="120dp"
+        android:layout_toStartOf="@id/showPass"
         android:autofillHints="password"
         android:backgroundTint="@color/grey"
         android:ems="15"

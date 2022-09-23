@@ -11,4 +11,8 @@
     <color name="grey">#DAD8D9</color>
     <color name="darkGrey">#888787</color>
     <color name="app">#6C63FF</color>
+    <color name="red">#A60303</color>
+    <color name="lightRed">#FB5D5D</color>
+    <color name="green">#62D622</color>
+    <color name="darkGreen">#2E7713</color>
 </resources>

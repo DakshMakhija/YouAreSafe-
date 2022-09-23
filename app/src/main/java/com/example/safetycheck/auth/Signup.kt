@@ -1,26 +1,32 @@
 package com.example.safetycheck.auth
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.text.TextWatcher
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.safetycheck.R
 import com.google.firebase.auth.FirebaseAuth
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
+
 class Signup : AppCompatActivity() {
 
     private var signIn: TextView? = null
+    private var teller: TextView? = null
     private var signUp: Button? = null
     private var email: EditText? = null
     private var password: EditText? = null
+    private lateinit var showPassImage: ImageView
+    private lateinit var showConfirmPassImage: ImageView
     private var confirmPassword: EditText? = null
     private var firebaseAuth: FirebaseAuth? = null
 
@@ -29,6 +35,9 @@ class Signup : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         signUp = findViewById(R.id.btnSignUp)
+        teller = findViewById(R.id.tvPassTeller)
+        showPassImage = findViewById(R.id.shoePass)
+        showConfirmPassImage = findViewById(R.id.showConfirmPass)
         signIn = findViewById(R.id.tvAlreadyUser)
         email = findViewById(R.id.etEmailSignup)
         password = findViewById(R.id.etPassSignup)
@@ -43,6 +52,105 @@ class Signup : AppCompatActivity() {
             startActivity(Intent(this, Login::class.java))
         }
 
+        showPassStrength()
+
+        showPassImage.setOnClickListener {
+            if (showPassImage.tag.equals("Show")) {
+                password!!.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                showPassImage.setImageResource(R.drawable.ic_baseline_visibility_off_24)
+                showPassImage.tag = "Hide"
+            } else {
+                password!!.transformationMethod = PasswordTransformationMethod.getInstance()
+                showPassImage.setImageResource(R.drawable.ic_baseline_remove_red_eye_24)
+                showPassImage.tag = "Show"
+            }
+        }
+
+        showConfirmPassImage.setOnClickListener {
+            Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show()
+
+        }
+
+        showConfirmPassImage.setOnClickListener {
+            if (showConfirmPassImage.tag.equals("Show")) {
+                confirmPassword!!.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
+                showConfirmPassImage.setImageResource(R.drawable.ic_baseline_visibility_off_24)
+                showConfirmPassImage.tag = "Hide"
+            } else {
+                confirmPassword!!.transformationMethod = PasswordTransformationMethod.getInstance()
+                showConfirmPassImage.setImageResource(R.drawable.ic_baseline_remove_red_eye_24)
+                showConfirmPassImage.tag = "Show"
+            }
+        }
+
+    }
+
+    private fun showPassStrength() {
+
+        var count: Int
+
+        val patternNumbers: Pattern
+        val patternAlpha: Pattern
+        val patternCapAlpha: Pattern
+        val patternSpecial: Pattern
+        val specialCharacters = "-@%\\[\\}+'!/#$^?:;,\\(\"\\)~`.*=&\\{>\\]<_"
+
+        val passwordRegexNumbers = "^(?=.*[0-9])"
+        val alphabetRegex = "(?=.*[a-z])"
+        val capitalAlphabetRegex = "(?=.*[A-Z])"
+        val specialRegex = "^(?=.*[$specialCharacters])(?=\\S+\$)"
+
+        patternNumbers = Pattern.compile(passwordRegexNumbers)
+        patternAlpha = Pattern.compile(alphabetRegex)
+        patternCapAlpha = Pattern.compile(capitalAlphabetRegex)
+        patternSpecial = Pattern.compile(specialRegex)
+
+        password?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            @SuppressLint("SetTextI18n")
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                count = 0
+                if (patternNumbers.matcher(p0!!).find()) {
+                    count++
+                }
+                if (patternAlpha.matcher(p0.toString().trim()).find()) {
+                    count++
+                }
+                if (patternCapAlpha.matcher(p0.toString().trim()).find()) {
+                    count++
+                }
+                if (patternSpecial.matcher(p0.toString().trim()).find()) {
+                    count++
+                }
+
+                when (count) {
+                    0 -> {
+                        teller?.text = ""
+                    }
+                    1 -> {
+                        teller?.text = "Weak"
+                        teller?.setTextColor(resources.getColor(R.color.red))
+                    }
+                    2 -> {
+                        teller?.text = "Moderate"
+                        teller?.setTextColor(resources.getColor(R.color.lightRed))
+                    }
+                    3 -> {
+                        teller?.text = "Strong"
+                        teller?.setTextColor(resources.getColor(R.color.darkGreen))
+                    }
+                    4 -> {
+                        teller?.text = "Very Strong"
+                        teller?.setTextColor(resources.getColor(R.color.green))
+                    }
+                }
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+        })
     }
 
     private fun signUpUser() {
@@ -50,7 +158,10 @@ class Signup : AppCompatActivity() {
         val passwordText = password?.text.toString().trim()
         val confirmPasswordText = confirmPassword?.text.toString().trim()
 
-        if (TextUtils.isEmpty(emailText) || TextUtils.isEmpty(passwordText) || TextUtils.isEmpty(confirmPasswordText)) {
+        if (TextUtils.isEmpty(emailText) || TextUtils.isEmpty(passwordText) || TextUtils.isEmpty(
+                confirmPasswordText
+            )
+        ) {
             val alert = AlertDialog.Builder(this)
             alert.setTitle("Signup failed!!")
                 .setMessage("Fill all credentials first.")
@@ -65,33 +176,33 @@ class Signup : AppCompatActivity() {
                 .create()
                 .show()
         } else {
-            if (isValidPassword(passwordText)) {
-                val progressBar = ProgressDialog(this)
-                progressBar.setMessage("Signing you up..")
-                progressBar.show()
+//            if (isValidPassword(passwordText)) {
+            val progressBar = ProgressDialog(this)
+            progressBar.setMessage("Signing you up..")
+            progressBar.show()
 
-                firebaseAuth?.createUserWithEmailAndPassword(emailText, passwordText)
-                    ?.addOnCompleteListener { task ->
-                        progressBar.dismiss()
-                        if (task.isSuccessful) {
-                            Toast.makeText(
-                                this,
-                                "Signed up successfully.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            startActivity(Intent(this, Login::class.java))
-                        } else {
-                            Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
-                        }
+            firebaseAuth?.createUserWithEmailAndPassword(emailText, passwordText)
+                ?.addOnCompleteListener { task ->
+                    progressBar.dismiss()
+                    if (task.isSuccessful) {
+                        Toast.makeText(
+                            this,
+                            "Signed up successfully.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        startActivity(Intent(this, Login::class.java))
+                    } else {
+                        Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
                     }
-            } else {
-                Toast.makeText(
-                    this,
-                    "Weak password...\nStrong password must contain lowercase, uppercase alphabet," +
-                            " a digit, a special character with no spaces.",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+                }
+//            } else {
+//                Toast.makeText(
+//                    this,
+//                    "Weak password...\nStrong password must contain lowercase, uppercase alphabet," +
+//                            " a digit, a special character with no spaces.",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
         }
     }
 
