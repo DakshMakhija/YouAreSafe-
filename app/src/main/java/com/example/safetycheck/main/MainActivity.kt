@@ -43,7 +43,7 @@ import kotlin.math.sqrt
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var addContact: FloatingActionButton
+    private lateinit var addContact: MaterialButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var toolbar : Toolbar
     private lateinit var stop: MaterialButton
