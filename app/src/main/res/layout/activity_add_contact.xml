@@ -5,6 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".main.AddContact">
 
+    <Button
+        android:id="@+id/addVia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Text"
+        android:layout_centerInParent="true"
+        android:layout_margin="5dp"
+        android:background="@drawable/oval"
+        android:drawableRight="@drawable/ic_baseline_add_ic_call_24"
+        android:text="Add from Contacts"
+        android:textColor="?android:textColorSecondary"
+        android:textAllCaps="false" />
+
     <ImageView
         android:id="@+id/ivAdd"
         android:layout_width="200dp"
@@ -23,7 +36,7 @@
         android:layout_below="@id/ivAdd"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:layout_marginBottom="70sp"
+        android:layout_marginBottom="10sp"
         android:fontFamily="@font/poppins"
         android:text="You are Safe!!"
         android:textColor="?android:textColorPrimary"
@@ -34,10 +47,11 @@
         android:id="@+id/etName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Text"
+        android:layout_below="@id/addVia"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginStart="50sp"
+        android:layout_marginTop="30sp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:autofillHints="name"

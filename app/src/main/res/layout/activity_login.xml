@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".auth.Login">
 
     <ImageView
@@ -10,7 +11,6 @@
         android:layout_height="300dp"
         android:layout_above="@id/tvLogin"
         android:layout_centerInParent="true"
-        android:layout_marginTop="-15dp"
         android:layout_marginBottom="-10dp"
         android:src="@drawable/login" />
 
@@ -18,7 +18,7 @@
         android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/etEmailLogin"
+        android:layout_above="@id/etEmailLayout"
         android:layout_centerInParent="true"
         android:layout_marginBottom="50dp"
         android:fontFamily="@font/poppins"
@@ -27,66 +27,79 @@
         android:textSize="20dp"
         android:textStyle="italic|bold" />
 
-    <EditText
-        android:id="@+id/etEmailLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/etPassLogin"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="50sp"
-        android:layout_marginBottom="30dp"
-        android:autofillHints="emailAddress"
-        android:backgroundTint="@color/grey"
-        android:ems="15"
-        android:fontFamily="@font/poppins"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etEmailLayout"
+        app:hintAnimationEnabled="true"
         android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:textColor="?android:textColorPrimary"
-        android:textColorHint="?android:textColorTertiary" />
-
-    <ImageView
-        android:id="@+id/showPass"
-        android:tag="Show"
-        android:layout_width="wrap_content"
-        android:clickable="true"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="35dp"
-        android:layout_above="@id/etPassLogin"
-        android:layout_marginBottom="-30dp"
-        android:src="@drawable/ic_baseline_remove_red_eye_24"
-        android:focusable="true" />
-
-    <EditText
-        android:id="@+id/etPassLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/btnSignIn"
+        android:focusable="true"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="10dp"
+        android:outlineProvider="paddedBounds"
+        android:fadingEdge="vertical"
+        android:requiresFadingEdge="vertical"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:labelFor="@id/etEmailLogin"
         android:layout_centerInParent="true"
-        android:layout_marginStart="25sp"
-        android:layout_marginBottom="120dp"
-        android:layout_toStartOf="@id/showPass"
-        android:autofillHints="password"
-        android:backgroundTint="@color/grey"
-        android:ems="15"
-        android:fontFamily="@font/poppins"
+        android:paddingHorizontal="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmailLogin"
+            android:layout_width="match_parent"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etPassLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etEmailLayout"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:fadingEdge="vertical"
+        android:focusable="true"
         android:hint="Password"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:textColor="?android:textColorPrimary"
-        android:textColorHint="?android:textColorTertiary" />
+        android:labelFor="@id/etEmailLogin"
+        android:outlineProvider="paddedBounds"
+        android:paddingHorizontal="10dp"
+        android:requiresFadingEdge="vertical"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:hintAnimationEnabled="true"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/app">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tvForgotPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etPassLogin"
+        android:layout_below="@id/etPassLayout"
         android:layout_alignParentEnd="true"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="-100dp"
         android:fontFamily="@font/poppins"
         android:text="Forgot Password?"
         android:textColor="?android:colorPrimary" />

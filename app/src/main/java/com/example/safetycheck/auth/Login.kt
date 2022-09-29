@@ -5,12 +5,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.safetycheck.R
 import com.example.safetycheck.main.MainActivity
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 
 class Login : AppCompatActivity() {
@@ -18,9 +17,8 @@ class Login : AppCompatActivity() {
     private var signUp : TextView? = null
     private lateinit var forgot : TextView
     private var signIn : Button? = null
-    private var email : EditText? = null
-    private lateinit var showPassImage : ImageView
-    private var password : EditText? = null
+    private var email : TextInputEditText? = null
+    private var password : TextInputEditText? = null
     private var firebaseAuth : FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +29,6 @@ class Login : AppCompatActivity() {
         forgot = findViewById(R.id.tvForgotPass)
         signIn = findViewById(R.id.btnSignIn)
         email = findViewById(R.id.etEmailLogin)
-        showPassImage = findViewById(R.id.showPass)
         password = findViewById(R.id.etPassLogin)
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -45,18 +42,6 @@ class Login : AppCompatActivity() {
 
         signUp?.setOnClickListener {
             startActivity(Intent(this, Signup::class.java))
-        }
-
-        showPassImage.setOnClickListener {
-            if (showPassImage.tag.equals("Show")) {
-                password!!.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                showPassImage.setImageResource(R.drawable.ic_baseline_visibility_off_24)
-                showPassImage.tag = "Hide"
-            } else {
-                password!!.transformationMethod = PasswordTransformationMethod.getInstance()
-                showPassImage.setImageResource(R.drawable.ic_baseline_remove_red_eye_24)
-                showPassImage.tag = "Show"
-            }
         }
 
     }

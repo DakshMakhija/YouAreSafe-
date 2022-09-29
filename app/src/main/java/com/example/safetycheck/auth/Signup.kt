@@ -7,27 +7,24 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.safetycheck.R
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import java.util.regex.Matcher
 import java.util.regex.Pattern
-
 
 class Signup : AppCompatActivity() {
 
     private var signIn: TextView? = null
     private var teller: TextView? = null
     private var signUp: Button? = null
-    private var email: EditText? = null
-    private var password: EditText? = null
-    private lateinit var showPassImage: ImageView
-    private lateinit var showConfirmPassImage: ImageView
-    private var confirmPassword: EditText? = null
+    private var email: TextInputEditText? = null
+    private var password: TextInputEditText? = null
+    private var confirmPassword: TextInputEditText? = null
     private var firebaseAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,8 +33,6 @@ class Signup : AppCompatActivity() {
 
         signUp = findViewById(R.id.btnSignUp)
         teller = findViewById(R.id.tvPassTeller)
-        showPassImage = findViewById(R.id.shoePass)
-        showConfirmPassImage = findViewById(R.id.showConfirmPass)
         signIn = findViewById(R.id.tvAlreadyUser)
         email = findViewById(R.id.etEmailSignup)
         password = findViewById(R.id.etPassSignup)
@@ -53,36 +48,6 @@ class Signup : AppCompatActivity() {
         }
 
         showPassStrength()
-
-        showPassImage.setOnClickListener {
-            if (showPassImage.tag.equals("Show")) {
-                password!!.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                showPassImage.setImageResource(R.drawable.ic_baseline_visibility_off_24)
-                showPassImage.tag = "Hide"
-            } else {
-                password!!.transformationMethod = PasswordTransformationMethod.getInstance()
-                showPassImage.setImageResource(R.drawable.ic_baseline_remove_red_eye_24)
-                showPassImage.tag = "Show"
-            }
-        }
-
-        showConfirmPassImage.setOnClickListener {
-            Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show()
-
-        }
-
-        showConfirmPassImage.setOnClickListener {
-            if (showConfirmPassImage.tag.equals("Show")) {
-                confirmPassword!!.transformationMethod =
-                    HideReturnsTransformationMethod.getInstance()
-                showConfirmPassImage.setImageResource(R.drawable.ic_baseline_visibility_off_24)
-                showConfirmPassImage.tag = "Hide"
-            } else {
-                confirmPassword!!.transformationMethod = PasswordTransformationMethod.getInstance()
-                showConfirmPassImage.setImageResource(R.drawable.ic_baseline_remove_red_eye_24)
-                showConfirmPassImage.tag = "Show"
-            }
-        }
 
     }
 
@@ -111,6 +76,7 @@ class Signup : AppCompatActivity() {
 
             @SuppressLint("SetTextI18n")
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                teller?.visibility = View.VISIBLE
                 count = 0
                 if (patternNumbers.matcher(p0!!).find()) {
                     count++

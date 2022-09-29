@@ -3,21 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".auth.Signup">
 
     <ImageView
+        android:id="@+id/image"
         android:layout_width="300dp"
+        android:layout_marginTop="-20sp"
         android:layout_height="300dp"
-        android:layout_above="@id/tvSignup"
+        android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="-20sp"
         android:src="@drawable/hello" />
 
     <TextView
+        android:layout_below="@id/image"
         android:id="@+id/tvSignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/etEmailSignup"
         android:layout_centerInParent="true"
         android:layout_marginStart="50sp"
         android:layout_marginBottom="50dp"
@@ -27,98 +30,116 @@
         android:textSize="22sp"
         android:textStyle="italic|bold" />
 
-    <EditText
-        android:id="@+id/etEmailSignup"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etEmailLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:hintAnimationEnabled="true"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/etPassSignup"
         android:layout_centerInParent="true"
-        android:layout_marginStart="50sp"
-        android:layout_marginBottom="30dp"
-        android:autofillHints="emailAddress"
-        android:backgroundTint="@color/grey"
-        android:ems="15"
-        android:fontFamily="@font/poppins"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:fadingEdge="vertical"
+        android:focusable="true"
         android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:textColor="?android:textColorPrimary"
-        android:textColorHint="?android:textColorTertiary" />
+        android:labelFor="@id/etEmailLogin"
+        android:outlineProvider="paddedBounds"
+        android:layout_below="@id/tvSignup"
+        android:paddingHorizontal="10dp"
+        android:requiresFadingEdge="vertical">
 
-    <EditText
-        android:id="@+id/etPassSignup"
-        android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmailSignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etPassLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/tvPassTeller"
+        android:layout_below="@id/etEmailLayout"
         android:layout_centerInParent="true"
-        android:layout_marginStart="50sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:autofillHints="password"
-        android:backgroundTint="@color/grey"
-        android:ems="15"
-        android:fontFamily="@font/poppins"
+        android:fadingEdge="vertical"
+        android:focusable="true"
         android:hint="Password"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:textColor="?android:textColorPrimary"
-        android:textColorHint="?android:textColorTertiary" />
+        android:outlineProvider="paddedBounds"
+        android:paddingHorizontal="10dp"
+        android:requiresFadingEdge="vertical"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:hintAnimationEnabled="true"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/app">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassSignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etConfirmPassLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPassTeller"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:fadingEdge="vertical"
+        android:focusable="true"
+        android:hint="Confirm Password"
+        android:outlineProvider="paddedBounds"
+        android:paddingHorizontal="10dp"
+        android:requiresFadingEdge="vertical"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:hintAnimationEnabled="true"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/app">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etConfirmPassSignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tvPassTeller"
         android:layout_width="wrap_content"
+        android:visibility="gone"
         android:layout_height="wrap_content"
-        android:layout_above="@id/etConfirmPassSignup"
+        android:layout_below="@id/etPassLayout"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="10dp"
         android:textColor="?android:textColorPrimary" />
-
-    <ImageView
-        android:id="@+id/shoePass"
-        android:tag="Show"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/etPassSignup"
-        android:layout_marginStart="-35dp"
-        android:layout_above="@id/etPassSignup"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="-30dp"
-        android:src="@drawable/ic_baseline_remove_red_eye_24" />
-
-    <ImageView
-        android:id="@+id/showConfirmPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/etConfirmPassSignup"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="-30dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_baseline_remove_red_eye_24"
-        android:tag="Show" />
-
-    <EditText
-        android:id="@+id/etConfirmPassSignup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/btnSignUp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="25sp"
-        android:layout_marginBottom="60dp"
-        android:layout_toStartOf="@id/showConfirmPass"
-        android:autofillHints="password"
-        android:backgroundTint="@color/grey"
-        android:ems="15"
-        android:fontFamily="@font/poppins"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:textColor="?android:textColorPrimary"
-        android:textColorHint="?android:textColorTertiary" />
 
     <Button
         android:id="@+id/btnSignUp"

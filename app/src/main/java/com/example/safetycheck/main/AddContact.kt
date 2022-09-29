@@ -1,11 +1,16 @@
 package com.example.safetycheck.main
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.ContactsContract
 import android.telephony.SmsManager
 import android.text.Editable
 import android.text.TextUtils
@@ -17,6 +22,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.example.safetycheck.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -28,6 +34,7 @@ class AddContact : AppCompatActivity() {
     private lateinit var number: EditText
     private lateinit var otpEnter: EditText
     private lateinit var addContact: Button
+    private lateinit var addContactVia: Button
     private lateinit var text: TextView
     private lateinit var firebaseAuth: FirebaseAuth
 
@@ -41,11 +48,16 @@ class AddContact : AppCompatActivity() {
         number = findViewById(R.id.etNumber)
         otpEnter = findViewById(R.id.etOtp)
         addContact = findViewById(R.id.btnAdd)
+        addContactVia = findViewById(R.id.addVia)
         text = findViewById(R.id.tvAuto)
         firebaseAuth = FirebaseAuth.getInstance()
 
         addContact.setOnClickListener {
             addContactNumber()
+        }
+
+        addContactVia.setOnClickListener {
+            getContact()
         }
 
         addContact.tag = "send"
@@ -54,6 +66,107 @@ class AddContact : AppCompatActivity() {
         otpEnter.visibility = View.GONE
         text.visibility = View.GONE
 
+    }
+
+    //To get the location
+    private fun getContact() {
+        if (checkPermissions()) {
+            //To check Permissions
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_CONTACTS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
+            }
+            val uri = Uri.parse("content://contacts")
+            val intent = Intent(Intent.ACTION_PICK, uri)
+            intent.setDataAndType(uri, ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE)
+            startActivityForResult(intent, 1)
+        } else {
+            requestPermission()
+        }
+    }
+
+    //To request the permissions.
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(
+                Manifest.permission.READ_CONTACTS
+            ),
+            100
+        )
+    }
+
+    //To show that permissions are checked.
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 100) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Granted", Toast.LENGTH_SHORT).show()
+                getContact()
+            } else {
+                Toast.makeText(this, "Denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    //To check if permissions are granted or not.
+    private fun checkPermissions(): Boolean {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+        return false
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when (requestCode) {
+            1 -> {
+                if (resultCode == Activity.RESULT_OK) {
+
+                    val contactData: Uri? = data?.data
+
+                    val projection = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+
+                    val cursor = contentResolver.query(
+                        contactData!!, projection,
+                        null, null, null
+                    )
+                    cursor!!.moveToFirst()
+
+                    val numberColumnIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                    val numberC = cursor.getString(numberColumnIndex)
+
+                    val nameColumnIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+                    val nameC = cursor.getString(nameColumnIndex)
+                    name.text = Editable.Factory.getInstance().newEditable(nameC)
+
+                    var newNumber = ""
+                    if (numberC.length > 10) {
+                            for (i in numberC.reversed()) {
+                                if (i != ' ' && newNumber.length < 10) {
+                                    newNumber += i
+                                }
+                            }
+                    }
+
+                    number.text = Editable.Factory.getInstance().newEditable(newNumber.reversed())
+                    cursor.close()
+                }
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
