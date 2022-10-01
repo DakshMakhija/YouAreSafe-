@@ -7,6 +7,7 @@
 
     <ImageView
         android:id="@+id/ivHelp"
+        android:contentDescription="@string/header"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
@@ -25,7 +26,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/poppins"
-        android:text="What we Do?"
+        android:text="@string/what_we_do_head"
         android:textColor="@color/app"
         android:textSize="18sp" />
 
@@ -53,7 +54,7 @@
         android:layout_marginBottom="30sp"
         android:fontFamily="@font/poppins"
         android:gravity="center"
-        android:text="Contact Us"
+        android:text="@string/contact_us"
         android:textColor="@color/app"
         android:textSize="18sp" />
 

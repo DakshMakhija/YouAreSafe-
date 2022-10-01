@@ -2,45 +2,36 @@ package com.example.safetycheck.auth
 
 import android.app.ProgressDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.*
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.safetycheck.R
+import androidx.appcompat.app.AppCompatActivity
+import com.example.safetycheck.databinding.ActivityLoginBinding
 import com.example.safetycheck.main.MainActivity
-import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 
 class Login : AppCompatActivity() {
 
-    private var signUp : TextView? = null
-    private lateinit var forgot : TextView
-    private var signIn : Button? = null
-    private var email : TextInputEditText? = null
-    private var password : TextInputEditText? = null
-    private var firebaseAuth : FirebaseAuth? = null
+    private lateinit var firebaseAuth : FirebaseAuth
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        signUp = findViewById(R.id.tvNewUser)
-        forgot = findViewById(R.id.tvForgotPass)
-        signIn = findViewById(R.id.btnSignIn)
-        email = findViewById(R.id.etEmailLogin)
-        password = findViewById(R.id.etPassLogin)
         firebaseAuth = FirebaseAuth.getInstance()
 
-        signIn?.setOnClickListener {
+        binding.btnSignIn.setOnClickListener {
             signInUser()
         }
 
-        forgot.setOnClickListener {
+        binding.tvForgotPass.setOnClickListener {
             Toast.makeText(this, "Not implemented yet!!", Toast.LENGTH_SHORT).show()
         }
 
-        signUp?.setOnClickListener {
+        binding.tvNewUser.setOnClickListener {
             startActivity(Intent(this, Signup::class.java))
         }
 
@@ -48,8 +39,8 @@ class Login : AppCompatActivity() {
 
     private fun signInUser() {
 
-        val emailText = email?.text.toString().trim()
-        val passText = password?.text.toString().trim()
+        val emailText = binding.etEmailLogin.text.toString().trim()
+        val passText = binding.etPassLogin.text.toString().trim()
 
         if (TextUtils.isEmpty(emailText) || TextUtils.isEmpty(passText)) {
             val alert = AlertDialog.Builder(this)
@@ -63,7 +54,7 @@ class Login : AppCompatActivity() {
             progressBar.setMessage("Logging in..")
             progressBar.show()
 
-            firebaseAuth?.signInWithEmailAndPassword(emailText, passText)?.addOnCompleteListener { task ->
+            firebaseAuth.signInWithEmailAndPassword(emailText, passText).addOnCompleteListener { task ->
                 progressBar.dismiss()
                 if(task.isSuccessful) {
                     Toast.makeText(this, "Logged in successfully.", Toast.LENGTH_SHORT).show()

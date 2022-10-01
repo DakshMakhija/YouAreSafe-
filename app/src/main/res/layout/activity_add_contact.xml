@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,12 +12,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/Text"
         android:layout_centerInParent="true"
-        android:layout_margin="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/oval"
-        android:drawableRight="@drawable/ic_baseline_add_ic_call_24"
-        android:text="Add from Contacts"
-        android:textColor="?android:textColorSecondary"
-        android:textAllCaps="false" />
+        android:drawableEnd="@drawable/ic_baseline_add_ic_call_24"
+        android:text="@string/add_from_contacts"
+        android:textAllCaps="false"
+        android:textColor="?android:textColorSecondary" />
 
     <ImageView
         android:id="@+id/ivAdd"
@@ -27,7 +31,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="-15sp"
-        android:src="@drawable/surv" />
+        android:src="@drawable/surv"
+        android:contentDescription="@string/header" />
 
     <TextView
         android:id="@+id/Text"
@@ -38,7 +43,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="10sp"
         android:fontFamily="@font/poppins"
-        android:text="You are Safe!!"
+        android:text="@string/you_are_safe"
         android:textColor="?android:textColorPrimary"
         android:textSize="22sp"
         android:textStyle="italic|bold" />
@@ -58,7 +63,7 @@
         android:backgroundTint="@color/grey"
         android:ems="15"
         android:fontFamily="@font/poppins"
-        android:hint="Name of the contact"
+        android:hint="@string/name_of_the_contact"
         android:inputType="text"
         android:maxLines="1"
         android:padding="10dp"
@@ -66,6 +71,7 @@
         android:textColorHint="?android:textColorTertiary" />
 
     <EditText
+        android:autofillHints="name"
         android:id="@+id/etRelation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,7 +85,7 @@
         android:backgroundTint="@color/grey"
         android:ems="15"
         android:fontFamily="@font/poppins"
-        android:hint="Relation"
+        android:hint="@string/relation"
         android:inputType="text"
         android:maxLines="1"
         android:padding="10dp"
@@ -101,7 +107,7 @@
         android:backgroundTint="@color/grey"
         android:ems="15"
         android:fontFamily="@font/poppins"
-        android:hint="Number"
+        android:hint="@string/number"
         android:inputType="phone"
         android:maxLength="10"
         android:maxLines="1"
@@ -125,7 +131,7 @@
         android:backgroundTint="@color/grey"
         android:ems="15"
         android:fontFamily="@font/poppins"
-        android:hint="Enter Otp"
+        android:hint="@string/enter_otp"
         android:inputType="phone"
         android:maxLength="4"
         android:maxLines="1"
@@ -142,13 +148,13 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="5sp"
         android:layout_marginEnd="15sp"
-        android:drawableRight="@drawable/ic_baseline_check_24"
         android:drawablePadding="5dp"
         android:fontFamily="@font/poppins"
         android:gravity="center"
-        android:text="OTP will be auto-verified"
+        android:text="@string/otp_will_be_auto_verified"
         android:textColor="?android:textColorPrimary"
-        android:textSize="10sp" />
+        android:textSize="11sp"
+        app:drawableRightCompat="@drawable/ic_baseline_check_24" />
 
     <Button
         android:id="@+id/btnAdd"
@@ -159,9 +165,9 @@
         android:layout_marginBottom="50dp"
         android:background="@drawable/oval"
         android:fontFamily="@font/poppins"
-        android:text="Add Contact"
+        android:text="@string/add_contact"
         android:textAllCaps="false"
         android:textColor="?android:textColorSecondary"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
 </RelativeLayout>

@@ -19,19 +19,16 @@ import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.safetycheck.ui.Help
 import com.example.safetycheck.auth.Login
 import com.example.safetycheck.R
 import com.example.safetycheck.adapter.ContactAdapter
+import com.example.safetycheck.databinding.ActivityMainBinding
 import com.example.safetycheck.model.Item
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -43,11 +40,7 @@ import kotlin.math.sqrt
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var addContact: MaterialButton
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var toolbar : Toolbar
-    private lateinit var stop: MaterialButton
-    private lateinit var send: MaterialButton
+    private lateinit var binding : ActivityMainBinding
     private lateinit var contactAdapter: ContactAdapter
     private lateinit var contactList: ArrayList<Item>
     private lateinit var firebaseAuth: FirebaseAuth
@@ -62,36 +55,31 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        toolbar = findViewById(R.id.toolbarMain)
-
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbarMain)
         supportActionBar?.title = ""
 
-        addContact = findViewById(R.id.fabAddContact)
-        stop = findViewById(R.id.btnStop)
-        send = findViewById(R.id.btnSend)
-        recyclerView = findViewById(R.id.rvContactList)
         contactList = ArrayList()
         contactAdapter = ContactAdapter(this, contactList)
 
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
-        recyclerView.adapter = contactAdapter
+        binding.rvContactList.setHasFixedSize(true)
+        binding.rvContactList.layoutManager = GridLayoutManager(this, 2)
+        binding.rvContactList.adapter = contactAdapter
         getContacts()
 
-        addContact.setOnClickListener {
+        binding.fabAddContact.setOnClickListener {
             startActivity(Intent(this, AddContact::class.java))
         }
 
-        stop.setOnClickListener {
+        binding.btnStop.setOnClickListener {
             stopMessages()
         }
 
-        send.setOnClickListener {
+        binding.btnSend.setOnClickListener {
             FirebaseDatabase.getInstance().reference.child("UsersSafety")
                 .child(firebaseAuth.currentUser!!.uid)
                 .addValueEventListener(object : ValueEventListener {
@@ -300,8 +288,8 @@ class MainActivity : AppCompatActivity() {
         }
         Toast.makeText(applicationContext, "Safe Message sent.", Toast.LENGTH_SHORT)
             .show()
-        stop.visibility = View.GONE
-        send.visibility = View.VISIBLE
+        binding.btnStop.visibility = View.GONE
+        binding.btnSend.visibility = View.VISIBLE
     }
 
     //Function to send message to the contacts.
@@ -320,8 +308,8 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, "Emergency Message sent.", Toast.LENGTH_SHORT).show()
         val mediaPlayer = MediaPlayer.create(this@MainActivity, R.raw.sound)
         mediaPlayer.start()
-        send.visibility = View.GONE
-        stop.visibility = View.VISIBLE
+        binding.btnSend.visibility = View.GONE
+        binding.btnStop.visibility = View.VISIBLE
     }
 
     //To get the contacts list
@@ -347,24 +335,6 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
-    }
-
-    private fun showPopup(v : View){
-        val popup = PopupMenu(this, v)
-        val inflater: MenuInflater = popup.menuInflater
-        inflater.inflate(R.menu.items, popup.menu)
-        popup.setOnMenuItemClickListener { menuItem ->
-            when(menuItem.itemId){
-                R.id.logout -> {
-                    logout()
-                }
-                R.id.deleteAcc -> {
-                    deleteAccount()
-                }
-            }
-            true
-        }
-        popup.show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

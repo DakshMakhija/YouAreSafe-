@@ -7,6 +7,7 @@
     tools:context=".auth.Signup">
 
     <ImageView
+        android:contentDescription="@string/header"
         android:id="@+id/image"
         android:layout_width="300dp"
         android:layout_marginTop="-20sp"
@@ -25,7 +26,7 @@
         android:layout_marginStart="50sp"
         android:layout_marginBottom="50dp"
         android:fontFamily="@font/poppins"
-        android:text="You are Safe!!"
+        android:text="@string/you_are_safe"
         android:textColor="?android:textColorPrimary"
         android:textSize="22sp"
         android:textStyle="italic|bold" />
@@ -45,7 +46,7 @@
         android:layout_marginBottom="10dp"
         android:fadingEdge="vertical"
         android:focusable="true"
-        android:hint="Email"
+        android:hint="@string/email"
         android:labelFor="@id/etEmailLogin"
         android:outlineProvider="paddedBounds"
         android:layout_below="@id/tvSignup"
@@ -74,7 +75,7 @@
         android:layout_marginBottom="5dp"
         android:fadingEdge="vertical"
         android:focusable="true"
-        android:hint="Password"
+        android:hint="@string/password"
         android:outlineProvider="paddedBounds"
         android:paddingHorizontal="10dp"
         android:requiresFadingEdge="vertical"
@@ -109,7 +110,7 @@
         android:layout_marginBottom="10dp"
         android:fadingEdge="vertical"
         android:focusable="true"
-        android:hint="Confirm Password"
+        android:hint="@string/confirm_password"
         android:outlineProvider="paddedBounds"
         android:paddingHorizontal="10dp"
         android:requiresFadingEdge="vertical"
@@ -154,7 +155,8 @@
         android:text="Sign up"
         android:textAllCaps="false"
         android:textColor="?android:textColorSecondary"
-        android:textSize="20dp" />
+        android:textSize="20sp"
+        tools:ignore="HardcodedText" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -170,7 +172,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:text="Already a user?"
-            android:textColor="?android:textColorPrimary" />
+            android:textColor="?android:textColorPrimary"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/tvAlreadyUser"
@@ -179,7 +182,8 @@
             android:fontFamily="@font/poppins"
             android:layout_gravity="center"
             android:text="Sign in now."
-            android:textColor="?android:colorPrimary" />
+            android:textColor="?android:colorPrimary"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 

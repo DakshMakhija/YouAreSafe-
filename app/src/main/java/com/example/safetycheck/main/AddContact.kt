@@ -16,55 +16,40 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.example.safetycheck.R
+import com.example.safetycheck.databinding.ActivityAddContactBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 class AddContact : AppCompatActivity() {
 
-    private lateinit var name: EditText
-    private lateinit var relation: EditText
-    private lateinit var number: EditText
-    private lateinit var otpEnter: EditText
-    private lateinit var addContact: Button
-    private lateinit var addContactVia: Button
-    private lateinit var text: TextView
+    private lateinit var binding : ActivityAddContactBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_contact)
+        binding = ActivityAddContactBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        name = findViewById(R.id.etName)
-        relation = findViewById(R.id.etRelation)
-        number = findViewById(R.id.etNumber)
-        otpEnter = findViewById(R.id.etOtp)
-        addContact = findViewById(R.id.btnAdd)
-        addContactVia = findViewById(R.id.addVia)
-        text = findViewById(R.id.tvAuto)
         firebaseAuth = FirebaseAuth.getInstance()
 
-        addContact.setOnClickListener {
+        binding.btnAdd.setOnClickListener {
             addContactNumber()
         }
 
-        addContactVia.setOnClickListener {
+        binding.addVia.setOnClickListener {
             getContact()
         }
 
-        addContact.tag = "send"
-        addContact.text = "Send OTP"
+        binding.btnAdd.tag = "send"
+        binding.btnAdd.text = "Send OTP"
 
-        otpEnter.visibility = View.GONE
-        text.visibility = View.GONE
+        binding.etOtp.visibility = View.GONE
+        binding.tvAuto.visibility = View.GONE
 
     }
 
@@ -151,7 +136,7 @@ class AddContact : AppCompatActivity() {
 
                     val nameColumnIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
                     val nameC = cursor.getString(nameColumnIndex)
-                    name.text = Editable.Factory.getInstance().newEditable(nameC)
+                    binding.etName.text = Editable.Factory.getInstance().newEditable(nameC)
 
                     var newNumber = ""
                     if (numberC.length > 10) {
@@ -162,7 +147,7 @@ class AddContact : AppCompatActivity() {
                             }
                     }
 
-                    number.text = Editable.Factory.getInstance().newEditable(newNumber.reversed())
+                    binding.etNumber.text = Editable.Factory.getInstance().newEditable(newNumber.reversed())
                     cursor.close()
                 }
             }
@@ -172,9 +157,9 @@ class AddContact : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun addContactNumber() {
 
-        val nameText = name.text.toString().trim()
-        val relationText = relation.text.toString().trim()
-        val numberText = number.text.toString().trim()
+        val nameText = binding.etName.text.toString().trim()
+        val relationText = binding.etRelation.text.toString().trim()
+        val numberText = binding.etNumber.text.toString().trim()
         if (TextUtils.isEmpty(nameText) || TextUtils.isEmpty(relationText) || TextUtils.isEmpty(
                 numberText
             ) || numberText.length != 10
@@ -186,8 +171,8 @@ class AddContact : AppCompatActivity() {
                 .create()
                 .show()
         } else {
-            otpEnter.visibility = View.VISIBLE
-            text.visibility = View.VISIBLE
+            binding.etOtp.visibility = View.VISIBLE
+            binding.tvAuto.visibility = View.VISIBLE
 
             val otp = (1000..9999).random().toString()
             Toast.makeText(this, "OTP is : $otp", Toast.LENGTH_SHORT).show()
@@ -200,7 +185,7 @@ class AddContact : AppCompatActivity() {
                 null
             )
 
-            otpEnter.addTextChangedListener(object : TextWatcher {
+            binding.etOtp.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -228,8 +213,8 @@ class AddContact : AppCompatActivity() {
                                                     "Number added successfully.",
                                                     Toast.LENGTH_SHORT
                                                 ).show()
-                                                addContact.tag = "add"
-                                                addContact.text = "Add contact"
+                                                binding.btnAdd.tag = "add"
+                                                binding.btnAdd.text = "Add contact"
                                                 startActivity(
                                                     Intent(
                                                         this@AddContact,

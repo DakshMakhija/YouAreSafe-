@@ -1,21 +1,20 @@
 package com.example.safetycheck.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
-import com.example.safetycheck.R
+import androidx.appcompat.app.AppCompatActivity
+import com.example.safetycheck.databinding.ActivityHelpBinding
 
 class Help : AppCompatActivity() {
 
-    private lateinit var contactUs : TextView
+    private lateinit var binding : ActivityHelpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_help)
+        binding = ActivityHelpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        contactUs = findViewById(R.id.contactUs)
-        contactUs.setOnClickListener {
+        binding.contactUs.setOnClickListener {
             startActivity(Intent(this, ContactUs::class.java))
         }
 

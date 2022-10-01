@@ -12,38 +12,28 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.safetycheck.R
-import com.google.android.material.textfield.TextInputEditText
+import com.example.safetycheck.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class Signup : AppCompatActivity() {
 
-    private var signIn: TextView? = null
-    private var teller: TextView? = null
-    private var signUp: Button? = null
-    private var email: TextInputEditText? = null
-    private var password: TextInputEditText? = null
-    private var confirmPassword: TextInputEditText? = null
-    private var firebaseAuth: FirebaseAuth? = null
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var binding: ActivitySignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        signUp = findViewById(R.id.btnSignUp)
-        teller = findViewById(R.id.tvPassTeller)
-        signIn = findViewById(R.id.tvAlreadyUser)
-        email = findViewById(R.id.etEmailSignup)
-        password = findViewById(R.id.etPassSignup)
-        confirmPassword = findViewById(R.id.etConfirmPassSignup)
         firebaseAuth = FirebaseAuth.getInstance()
 
-        signUp?.setOnClickListener {
+        binding.btnSignUp.setOnClickListener {
             signUpUser()
         }
 
-        signIn?.setOnClickListener {
+        binding.tvAlreadyUser.setOnClickListener {
             startActivity(Intent(this, Login::class.java))
         }
 
@@ -71,12 +61,12 @@ class Signup : AppCompatActivity() {
         patternCapAlpha = Pattern.compile(capitalAlphabetRegex)
         patternSpecial = Pattern.compile(specialRegex)
 
-        password?.addTextChangedListener(object : TextWatcher {
+        binding.etPassSignup.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             @SuppressLint("SetTextI18n")
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                teller?.visibility = View.VISIBLE
+                binding.tvPassTeller.visibility = View.VISIBLE
                 count = 0
                 if (patternNumbers.matcher(p0!!).find()) {
                     count++
@@ -93,23 +83,23 @@ class Signup : AppCompatActivity() {
 
                 when (count) {
                     0 -> {
-                        teller?.text = ""
+                        binding.tvPassTeller.text = ""
                     }
                     1 -> {
-                        teller?.text = "Weak"
-                        teller?.setTextColor(resources.getColor(R.color.red))
+                        binding.tvPassTeller.text = "Weak"
+                        binding.tvPassTeller.setTextColor(resources.getColor(R.color.red))
                     }
                     2 -> {
-                        teller?.text = "Moderate"
-                        teller?.setTextColor(resources.getColor(R.color.lightRed))
+                        binding.tvPassTeller.text = "Moderate"
+                        binding.tvPassTeller.setTextColor(resources.getColor(R.color.lightRed))
                     }
                     3 -> {
-                        teller?.text = "Strong"
-                        teller?.setTextColor(resources.getColor(R.color.darkGreen))
+                        binding.tvPassTeller.text = "Strong"
+                        binding.tvPassTeller.setTextColor(resources.getColor(R.color.darkGreen))
                     }
                     4 -> {
-                        teller?.text = "Very Strong"
-                        teller?.setTextColor(resources.getColor(R.color.green))
+                        binding.tvPassTeller.text = "Very Strong"
+                        binding.tvPassTeller.setTextColor(resources.getColor(R.color.green))
                     }
                 }
 
@@ -120,9 +110,9 @@ class Signup : AppCompatActivity() {
     }
 
     private fun signUpUser() {
-        val emailText = email?.text.toString().trim()
-        val passwordText = password?.text.toString().trim()
-        val confirmPasswordText = confirmPassword?.text.toString().trim()
+        val emailText = binding.etEmailSignup.text.toString().trim()
+        val passwordText = binding.etPassSignup.text.toString().trim()
+        val confirmPasswordText = binding.etConfirmPassSignup.text.toString().trim()
 
         if (TextUtils.isEmpty(emailText) || TextUtils.isEmpty(passwordText) || TextUtils.isEmpty(
                 confirmPasswordText
@@ -142,13 +132,12 @@ class Signup : AppCompatActivity() {
                 .create()
                 .show()
         } else {
-//            if (isValidPassword(passwordText)) {
             val progressBar = ProgressDialog(this)
             progressBar.setMessage("Signing you up..")
             progressBar.show()
 
-            firebaseAuth?.createUserWithEmailAndPassword(emailText, passwordText)
-                ?.addOnCompleteListener { task ->
+            firebaseAuth.createUserWithEmailAndPassword(emailText, passwordText)
+                .addOnCompleteListener { task ->
                     progressBar.dismiss()
                     if (task.isSuccessful) {
                         Toast.makeText(
@@ -161,38 +150,7 @@ class Signup : AppCompatActivity() {
                         Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
                     }
                 }
-//            } else {
-//                Toast.makeText(
-//                    this,
-//                    "Weak password...\nStrong password must contain lowercase, uppercase alphabet," +
-//                            " a digit, a special character with no spaces.",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
         }
-    }
-
-    private fun isValidPassword(password: String): Boolean {
-        val pattern: Pattern
-        val specialCharacters = "-@%\\[\\}+'!/#$^?:;,\\(\"\\)~`.*=&\\{>\\]<_"
-
-        /*
-
-        REGEX condition explanation....
-
-        (?=.*[0-9])  This is for that it should have at least a digit.
-        (?=.*[a-z])  This is for that it should have at least a lowercase alphabet.
-        (?=.*[A-Z])  This is for that it should have at least a uppercase alphabet.
-        (?=.*[$specialCharacters])  This is for that it should have at least a special character which are defined above..
-        (?=\S+$).{8,20}  This is for that it should have at least 8 and at most 20 characters without any space..
-
-         */
-
-        val passwordRegex =
-            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[$specialCharacters])(?=\\S+$).{8,20}$"
-        pattern = Pattern.compile(passwordRegex)
-        val matcher: Matcher = pattern.matcher(password)
-        return matcher.matches()
     }
 
     override fun onBackPressed() {

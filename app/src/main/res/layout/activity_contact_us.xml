@@ -10,7 +10,8 @@
         android:layout_width="300sp"
         android:layout_height="300sp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/contact" />
+        android:src="@drawable/contact"
+        android:contentDescription="@string/header" />
 
     <TextView
         android:id="@+id/about"
@@ -40,18 +41,21 @@
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:layout_marginHorizontal="10dp"
-            android:src="@drawable/ic_gmail" />
+            android:src="@drawable/ic_gmail"
+            android:contentDescription="@string/contact" />
 
         <ImageView
             android:id="@+id/ivLinkedIn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:contentDescription="@string/contact"
             android:src="@drawable/ic_linkedin" />
 
         <ImageView
             android:id="@+id/ivInsta"
             android:layout_width="30dp"
+            android:contentDescription="@string/contact"
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginHorizontal="10dp"
@@ -60,6 +64,7 @@
         <ImageView
             android:id="@+id/ivTwitter"
             android:layout_width="60dp"
+            android:contentDescription="@string/contact"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_twitter" />
@@ -68,6 +73,7 @@
             android:id="@+id/ivGitHub"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:contentDescription="@string/contact"
             android:layout_gravity="center"
             android:src="@drawable/ic_github" />
 
@@ -83,7 +89,7 @@
         android:fontFamily="@font/poppins"
         android:gravity="center"
         android:padding="10sp"
-        android:text="Contact us"
+        android:text="@string/contact_us"
         android:textColor="?android:textColorPrimary"
         android:textSize="17sp" />
 

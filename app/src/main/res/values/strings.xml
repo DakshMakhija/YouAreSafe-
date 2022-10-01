@@ -1,5 +1,22 @@
 <resources>
     <string name="app_name" />
-    <string name="what_we_do">\nThis app helps ensuring the safety of everyone and let their loved ones know about them in any kind of danger.\n\nWe will take contact numbers from you for emergency.\nWhen user will shake the device with some good force or long press the volume down button when application is open, we will send a text message to the entered emergency contacts that you are in danger with your current location.\nWe will do the same every five minutes with your updated current location till you press the stop button in the application confirming that you are safe, and we will send a text message that you are safe.\nFor all this you have to give access to location and allow us to make phone calls and send text message.</string>
+    <string name="what_we_do">\nThis app helps ensuring the safety of everyone and let their loved ones know about them in any kind of danger.\n\nWe will take contact numbers from you for emergency.\nWhen user will shake the device with some good force or long press the volume down button when application is open, we will send a text message to the entered emergency contacts that you are in danger with your current location.\nWe will do the same every five minutes with your updated current location till you press the stop button in the application confirming that you are safe, and we will send a text message that you are safe.\nFor all this you have to give access to location and allow us to make phone calls and send text message and keep your internet and location on.</string>
     <string name="about">I am a third year undergrad right now who is in love with android development.</string>
+    <string name="add_contact">Add Contact</string>
+    <string name="otp_will_be_auto_verified">OTP will be auto-verified</string>
+    <string name="enter_otp">Enter Otp</string>
+    <string name="number">Number</string>
+    <string name="relation">Relation</string>
+    <string name="name_of_the_contact">Name of the contact</string>
+    <string name="you_are_safe">You are Safe!!</string>
+    <string name="header">header</string>
+    <string name="add_from_contacts">Add from Contacts</string>
+    <string name="contact">contact</string>
+    <string name="contact_us">Contact us</string>
+    <string name="what_we_do_head">What we Do?</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">Sign in</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>

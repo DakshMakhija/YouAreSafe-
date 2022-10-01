@@ -4,46 +4,36 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.safetycheck.R
+import com.example.safetycheck.databinding.ActivityContactUsBinding
 
 class ContactUs : AppCompatActivity() {
 
-    private lateinit var ig: ImageView
-    private lateinit var gmail: ImageView
-    private lateinit var twitter: ImageView
-    private lateinit var linkedIn: ImageView
-    private lateinit var gitHub: ImageView
+    private lateinit var binding: ActivityContactUsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contact_us)
+        binding = ActivityContactUsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        ig = findViewById(R.id.ivInsta)
-        gmail = findViewById(R.id.ivGmail)
-        twitter = findViewById(R.id.ivTwitter)
-        linkedIn = findViewById(R.id.ivLinkedIn)
-        gitHub = findViewById(R.id.ivGitHub)
-
-        ig.setOnClickListener {
+        binding.ivInsta.setOnClickListener {
             openApp(Uri.parse("https://www.instagram.com/axtbansal/"))
         }
 
-        twitter.setOnClickListener {
+        binding.ivTwitter.setOnClickListener {
             openApp(Uri.parse("https://twitter.com/AxtBansal"))
         }
 
-        linkedIn.setOnClickListener {
+        binding.ivLinkedIn.setOnClickListener {
             openApp(Uri.parse("https://www.linkedin.com/in/axtbansal/"))
         }
 
-        gmail.setOnClickListener {
+        binding.ivGmail.setOnClickListener {
             openApp(Uri.parse("mailto:abansal11ae@gmail.com"))
         }
 
-        gitHub.setOnClickListener {
+        binding.ivGitHub.setOnClickListener {
             openApp(Uri.parse("https://github.com/IamBansal"))
         }
 
@@ -53,7 +43,6 @@ class ContactUs : AppCompatActivity() {
     private fun openApp(uri: Uri) {
         val intent =
             Intent(Intent.ACTION_VIEW, uri)
-        //            intent.setPackage("com.instagram.android")
         try {
             startActivity(intent)
         } catch (e: ActivityNotFoundException) {
